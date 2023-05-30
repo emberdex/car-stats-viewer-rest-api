@@ -14,7 +14,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UpdateTenantAccessKeyRequest {
 
-  private String tenantId;
-
   private String newAccessKey;
 }

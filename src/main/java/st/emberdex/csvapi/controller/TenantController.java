@@ -76,11 +76,12 @@ public class TenantController {
 
   @PostMapping("/update-key")
   public ResponseEntity<Void> updateTenantAccessKey(
+      @RequestParam String tenantId,
       @RequestBody UpdateTenantAccessKeyRequest requestBody
   ) {
 
     tenantService.updateTenantAccessKey(
-        requestBody.getTenantId(),
+        tenantId,
         requestBody.getNewAccessKey()
     );
 
