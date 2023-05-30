@@ -10,4 +10,8 @@ public interface TenantRepository extends MongoRepository<Tenant, String> {
   boolean existsTenantByTenantName(String tenantName);
 
   Optional<Tenant> findTenantByTenantName(String tenantName);
+
+  Optional<Tenant> findTenantById(String tenantId);
+
+
 }

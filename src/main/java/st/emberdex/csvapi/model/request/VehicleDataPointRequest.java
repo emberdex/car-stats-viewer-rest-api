@@ -1,4 +1,4 @@
-package st.emberdex.csvapi.model;
+package st.emberdex.csvapi.model.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
+import st.emberdex.csvapi.model.VehicleDataPoint;
 import st.emberdex.csvapi.model.enums.DrivingState;
 import st.emberdex.csvapi.model.enums.VehicleGear;
 import st.emberdex.csvapi.model.enums.VehicleIgnitionState;
@@ -16,7 +17,6 @@ import st.emberdex.csvapi.model.enums.VehicleIgnitionState;
 import java.util.Date;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
-import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 @Data

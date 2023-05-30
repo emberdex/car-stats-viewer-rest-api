@@ -1,4 +1,4 @@
-package st.emberdex.csvapi.model;
+package st.emberdex.csvapi.model.document;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import st.emberdex.csvapi.model.VehicleDataPoint;
 
 @Data
 @Builder

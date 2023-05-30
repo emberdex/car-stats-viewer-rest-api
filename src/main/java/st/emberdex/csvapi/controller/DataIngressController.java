@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import st.emberdex.csvapi.model.VehicleDataPointRequest;
+import st.emberdex.csvapi.model.request.VehicleDataPointRequest;
 import st.emberdex.csvapi.service.VehicleDataPointService;
 
 import java.security.Principal;
@@ -21,9 +21,9 @@ public class DataIngressController {
   private final VehicleDataPointService vehicleDataPointService;
 
   @PostMapping
-  public ResponseEntity<Void> logDataPoint(@RequestBody VehicleDataPointRequest dataPoint, Principal principal) {
+  public ResponseEntity<Void> logVehicleDataPoint(@RequestBody VehicleDataPointRequest dataPoint, Principal principal) {
 
-    vehicleDataPointService.save(dataPoint, principal.getName());
+    vehicleDataPointService.saveNewDataPoint(dataPoint, principal.getName());
 
     return ResponseEntity.ok().build();
   }
