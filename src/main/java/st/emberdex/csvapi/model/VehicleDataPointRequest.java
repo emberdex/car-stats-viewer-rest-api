@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import st.emberdex.csvapi.model.enums.DrivingState;
 import st.emberdex.csvapi.model.enums.VehicleGear;
@@ -15,13 +16,15 @@ import st.emberdex.csvapi.model.enums.VehicleIgnitionState;
 import java.util.Date;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(NON_EMPTY)
-public class VehicleDataPoint {
+public class VehicleDataPointRequest {
 
   /**
    * The ambient temperature around the vehicle.
@@ -147,13 +150,36 @@ public class VehicleDataPoint {
   private Float usedEnergy;
 
   /**
-   * GPS location of this vehicle when this data point was recorded.
+   * GPS latitude of the vehicle when this data point was recorded.
    */
-  private GeoJsonPoint location;
+  @JsonProperty("lat")
+  private Double latitude;
+
+  /**
+   * GPS longitude of the vehicle when this data point was recorded.
+   */
+  @JsonProperty("lon")
+  private Double longitude;
 
   /**
    * GPS altitude of the vehicle when this data point was recorded, in metres.
    */
   @JsonProperty("alt")
   private Double altitude;
+
+  public VehicleDataPoint toDataPoint() {
+    VehicleDataPoint dataPoint = new VehicleDataPoint();
+    BeanUtils.copyProperties(this, dataPoint);
+
+    if (coordinateIsValid(longitude) && coordinateIsValid(latitude)) {
+      GeoJsonPoint location = new GeoJsonPoint(longitude, latitude);
+      dataPoint.setLocation(location);
+    }
+
+    return dataPoint;
+  }
+
+  private boolean coordinateIsValid(double value) {
+    return nonNull(value) && value != 0.0;
+  }
 }
