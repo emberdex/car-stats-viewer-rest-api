@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import st.emberdex.csvapi.model.VehicleDataPoint;
-import st.emberdex.csvapi.service.TenantService;
+import st.emberdex.csvapi.service.VehicleDataPointService;
+
+import java.security.Principal;
 
 @Slf4j
 @RestController
@@ -16,14 +18,13 @@ import st.emberdex.csvapi.service.TenantService;
 @RequiredArgsConstructor
 public class DataIngressController {
 
-  private final TenantService tenantService;
+  private final VehicleDataPointService vehicleDataPointService;
 
   @PostMapping
-  public ResponseEntity<Void> logDataPoint(@RequestBody VehicleDataPoint dataPoint) {
+  public ResponseEntity<Void> logDataPoint(@RequestBody VehicleDataPoint dataPoint, Principal principal) {
 
-    log.info("Logging data point received at {}", dataPoint.getTimestamp());
+    vehicleDataPointService.save(dataPoint, principal.getName());
 
     return ResponseEntity.ok().build();
   }
 }
-

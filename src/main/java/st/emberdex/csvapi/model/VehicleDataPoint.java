@@ -63,7 +63,7 @@ public class VehicleDataPoint {
   /**
    * Amount of energy the battery has been recharged by, in Wh
    */
-  private Integer chargedEnergy;
+  private Float chargedEnergy;
 
   /**
    * Currently selected drive mode.
@@ -79,7 +79,7 @@ public class VehicleDataPoint {
    * Current power consumption, in kW.
    */
   @JsonProperty("currentPower")
-  private Integer currentPowerConsumption;
+  private Float currentPowerConsumption;
 
   /**
    * Current vehicle speed, in km/h.
