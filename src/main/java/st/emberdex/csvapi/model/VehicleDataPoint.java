@@ -19,7 +19,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class CarStatsViewerDataPoint {
+public class VehicleDataPoint {
 
   /**
    * The ambient temperature around the vehicle.
