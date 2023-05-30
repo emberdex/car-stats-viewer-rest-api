@@ -3,9 +3,13 @@ package st.emberdex.csvapi.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import st.emberdex.csvapi.model.request.VehicleDataPointRequest;
 import st.emberdex.csvapi.model.document.VehicleDataPointDocument;
+import st.emberdex.csvapi.model.request.VehicleDataPointRequest;
 import st.emberdex.csvapi.repository.VehicleDataPointRepository;
+
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -25,9 +29,15 @@ public class VehicleDataPointService {
     VehicleDataPointDocument document = VehicleDataPointDocument.builder()
         .tenantName(tenantName)
         .dataPoint(dataPointRequest.toDataPoint())
+        .storedAt(Instant.now().atOffset(ZoneOffset.UTC).toInstant())
         .build();
 
     vehicleDataPointRepository.save(document);
+  }
+
+  public List<VehicleDataPointDocument> getDataPointsForTenant(String tenantName) {
+
+    return vehicleDataPointRepository.getAllByTenantName(tenantName);
   }
 
   /**

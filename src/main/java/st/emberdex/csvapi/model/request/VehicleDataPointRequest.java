@@ -179,7 +179,7 @@ public class VehicleDataPointRequest {
     return dataPoint;
   }
 
-  private boolean coordinateIsValid(double value) {
+  private boolean coordinateIsValid(Double value) {
     return nonNull(value) && value != 0.0;
   }
 }
