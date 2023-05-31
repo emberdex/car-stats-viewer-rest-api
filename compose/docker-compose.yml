@@ -7,7 +7,7 @@ services:
     depends_on:
       - mongodb
     ports:
-      - "127.0.0.1:${API_LISTEN_PORT}:8080"
+      - "127.0.0.1:8080:8080"
     env_file:
       - .env.api
 
