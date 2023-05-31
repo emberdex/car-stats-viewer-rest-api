@@ -10,7 +10,7 @@
   </parent>
   <groupId>st.emberdex</groupId>
   <artifactId>car-stats-viewer-rest-api</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0</version>
   <name>CarStatsViewerRestApi</name>
   <description>CarStatsViewerRestApi</description>
   <properties>
