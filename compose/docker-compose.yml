@@ -18,3 +18,5 @@ services:
       - "127.0.0.1:27017:27017"
     env_file:
       - .env.mongodb
+    volumes:
+      - ./mongodb-init.js:/docker-entrypoint-initdb.d/mongodb-init.js:ro
