@@ -1,6 +1,7 @@
 package st.emberdex.csvapi.config.security.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import st.emberdex.csvapi.model.Tenant;
 import st.emberdex.csvapi.repository.TenantRepository;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class TenantDetailsService implements UserDetailsService {
@@ -27,6 +29,8 @@ public class TenantDetailsService implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+    log.debug("Authenticating for user {}, tenant-admin is {}", username, tenancyAdminUsername);
 
     if (username.equals(tenancyAdminUsername)) {
       return User

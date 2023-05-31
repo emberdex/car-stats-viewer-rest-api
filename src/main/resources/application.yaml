@@ -10,3 +10,12 @@ spring:
 tenancy:
   admin-username: ${TENANT_ADMIN_USERNAME:}
   admin-password: ${TENANT_ADMIN_PASSWORD:}
+
+springdoc:
+  packages-to-scan: st.emberdex.csvapi
+
+logging:
+  level:
+    st:
+      emberdex:
+        csvapi: ${LOGGING_LEVEL:INFO}
