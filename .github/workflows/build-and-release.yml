@@ -1,3 +1,7 @@
+on:
+  release:
+    types: [published]
+
 jobs:
   push_to_docker_registry:
     name: Build and push Docker image to Docker Hub
