@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  api:
+    image: "emberdex/car-stats-viewer-rest-api:1.0.0"
+    container_name: "csv-rest-api"
+    depends_on:
+      - mongodb
+    ports:
+      - "127.0.0.1:${API_LISTEN_PORT}:8080"
+    env_file:
+      - .env.api
+
+  mongodb:
+    image: "mongo:6.0.6"
+    container_name: "csv-mongo"
+    ports:
+      - "127.0.0.1:27017:27017"
+    env_file:
+      - .env.mongodb
