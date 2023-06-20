@@ -57,7 +57,7 @@ public class VehicleDataPointRequest {
    * Date and time at which the charging cable was plugged in.
    */
   // Sep 17, 2023 3:39:21 PM
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMM d, yyyy h:m:s a")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMM d, yyyy h:m:s")
   private Date chargeStartDate;
 
   /**
@@ -141,7 +141,7 @@ public class VehicleDataPointRequest {
   /**
    * Date and time at which the current trip was started.
    */
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMM d, yyyy h:m:s a")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMM d, yyyy h:m:s")
   private Date tripStartDate;
 
   /**
