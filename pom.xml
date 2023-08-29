@@ -15,18 +15,21 @@
   <description>CarStatsViewerRestApi</description>
   <properties>
     <java.version>17</java.version>
+
+    <!-- Spring Boot starter versions -->
+    <spring-boot.version>3.0.6</spring-boot.version>
   </properties>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-mongodb</artifactId>
-      <version>3.0.6</version>
+      <version>${spring-boot.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
-      <version>3.0.6</version>
+      <version>${spring-boot.version}</version>
     </dependency>
 
     <dependency>
@@ -56,9 +59,14 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security</artifactId>
-      <version>3.0.6</version>
+      <version>${spring-boot.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+      <version>${spring-boot.version}</version>
+    </dependency>
   </dependencies>
 
   <build>
