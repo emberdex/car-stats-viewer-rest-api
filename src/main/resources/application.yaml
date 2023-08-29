@@ -14,6 +14,18 @@ tenancy:
 springdoc:
   packages-to-scan: st.emberdex.csvapi
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,httpexchanges
+    enabled-by-default: false
+  endpoint:
+    health:
+      enabled: true
+    httpexchanges:
+      enabled: true
+
 logging:
   level:
     st:
