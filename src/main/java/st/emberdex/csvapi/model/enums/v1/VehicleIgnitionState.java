@@ -1,4 +1,4 @@
-package st.emberdex.csvapi.model.enums;
+package st.emberdex.csvapi.model.enums.v1;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.RequiredArgsConstructor;

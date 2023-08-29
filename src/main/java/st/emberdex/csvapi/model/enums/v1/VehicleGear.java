@@ -1,8 +1,11 @@
-package st.emberdex.csvapi.model.enums;
+package st.emberdex.csvapi.model.enums.v1;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * A copy of the enumeration from Android Automotive that maps integral values for the vehicle gear
+ */
 @RequiredArgsConstructor
 public enum VehicleGear {
   GEAR_DRIVE(8),

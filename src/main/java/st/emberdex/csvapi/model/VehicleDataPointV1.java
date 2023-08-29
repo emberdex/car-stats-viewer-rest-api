@@ -1,4 +1,4 @@
-package st.emberdex.csvapi.model.request;
+package st.emberdex.csvapi.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -7,24 +7,21 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
-import st.emberdex.csvapi.model.VehicleDataPoint;
-import st.emberdex.csvapi.model.enums.DrivingState;
-import st.emberdex.csvapi.model.enums.VehicleGear;
-import st.emberdex.csvapi.model.enums.VehicleIgnitionState;
+import st.emberdex.csvapi.model.enums.v1.DrivingState;
+import st.emberdex.csvapi.model.enums.v1.VehicleGear;
+import st.emberdex.csvapi.model.enums.v1.VehicleIgnitionState;
 
 import java.util.Date;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
-import static java.util.Objects.nonNull;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(NON_EMPTY)
-public class VehicleDataPointRequest {
+public class VehicleDataPointV1 extends VehicleDataPoint {
 
   /**
    * The ambient temperature around the vehicle.
@@ -57,7 +54,7 @@ public class VehicleDataPointRequest {
    * Date and time at which the charging cable was plugged in.
    */
   // Sep 17, 2023 3:39:21 PM
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMM d, yyyy h:m:s")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMM d, yyyy h:m:s a")
   private Date chargeStartDate;
 
   /**
@@ -124,11 +121,6 @@ public class VehicleDataPointRequest {
   private Integer stateOfCharge;
 
   /**
-   * Timestamp, as a Unix epoch, that this data point was captured.
-   */
-  private Long timestamp;
-
-  /**
    * Travel time, in milliseconds.
    */
   private Long travelTime;
@@ -141,7 +133,7 @@ public class VehicleDataPointRequest {
   /**
    * Date and time at which the current trip was started.
    */
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMM d, yyyy h:m:s")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMM d, yyyy h:m:s a")
   private Date tripStartDate;
 
   /**
@@ -150,36 +142,13 @@ public class VehicleDataPointRequest {
   private Float usedEnergy;
 
   /**
-   * GPS latitude of the vehicle when this data point was recorded.
+   * GPS location of this vehicle when this data point was recorded.
    */
-  @JsonProperty("lat")
-  private Double latitude;
-
-  /**
-   * GPS longitude of the vehicle when this data point was recorded.
-   */
-  @JsonProperty("lon")
-  private Double longitude;
+  private GeoJsonPoint location;
 
   /**
    * GPS altitude of the vehicle when this data point was recorded, in metres.
    */
   @JsonProperty("alt")
   private Double altitude;
-
-  public VehicleDataPoint toDataPoint() {
-    VehicleDataPoint dataPoint = new VehicleDataPoint();
-    BeanUtils.copyProperties(this, dataPoint);
-
-    if (coordinateIsValid(longitude) && coordinateIsValid(latitude)) {
-      GeoJsonPoint location = new GeoJsonPoint(longitude, latitude);
-      dataPoint.setLocation(location);
-    }
-
-    return dataPoint;
-  }
-
-  private boolean coordinateIsValid(Double value) {
-    return nonNull(value) && value != 0.0;
-  }
 }

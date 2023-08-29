@@ -34,6 +34,16 @@ public class VehicleDataPointDocument {
   private Instant storedAt;
 
   /**
+   * The API version of the tenant.
+   */
+  private Integer tenantApiVersion;
+
+  /**
+   * The app version of the tenant.
+   */
+  private String tenantAppVersion;
+
+  /**
    * The vehicle data point.
    */
   private VehicleDataPoint dataPoint;

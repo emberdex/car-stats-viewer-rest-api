@@ -4,7 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import st.emberdex.csvapi.model.document.VehicleDataPointDocument;
-import st.emberdex.csvapi.model.request.VehicleDataPointRequest;
+import st.emberdex.csvapi.model.request.datapoint.VehicleDataPointRequest;
+import st.emberdex.csvapi.model.request.datapoint.v2.VehicleDataPointV2Request;
 import st.emberdex.csvapi.repository.VehicleDataPointRepository;
 
 import java.time.Instant;
@@ -26,11 +27,24 @@ public class VehicleDataPointService {
    */
   public void saveNewDataPoint(VehicleDataPointRequest dataPointRequest, String tenantName) {
 
-    VehicleDataPointDocument document = VehicleDataPointDocument.builder()
+    VehicleDataPointDocument.VehicleDataPointDocumentBuilder documentBuilder = VehicleDataPointDocument.builder();
+
+    documentBuilder
         .tenantName(tenantName)
         .dataPoint(dataPointRequest.toDataPoint())
-        .storedAt(Instant.now().atOffset(ZoneOffset.UTC).toInstant())
-        .build();
+        .storedAt(Instant.now().atOffset(ZoneOffset.UTC).toInstant());
+
+    if (dataPointRequest instanceof VehicleDataPointV2Request v2Request) {
+      documentBuilder
+          .tenantApiVersion(v2Request.getApiVersion())
+          .tenantAppVersion(v2Request.getAppVersion());
+    } else {
+      documentBuilder
+          .tenantApiVersion(1)
+          .tenantAppVersion("UNKNOWN");
+    }
+
+    VehicleDataPointDocument document = documentBuilder.build();
 
     vehicleDataPointRepository.save(document);
   }
